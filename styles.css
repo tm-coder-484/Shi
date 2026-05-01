@@ -1,3 +1,43 @@
+#hacks-osd {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 18px 32px;
+    border-radius: 10px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 99999;
+    font-family: monospace;
+    font-size: 16px;
+    text-align: center;
+    transition: opacity 0.6s ease;
+    min-width: 240px;
+}
+#hacks-osd.hacks-on {
+    background: rgba(0, 20, 0, 0.92);
+    border: 2px solid #00ff44;
+    box-shadow: 0 0 30px #00ff44, inset 0 0 15px rgba(0,255,68,0.1);
+    color: #00ff44;
+}
+#hacks-osd.hacks-off {
+    background: rgba(20, 0, 0, 0.92);
+    border: 2px solid #ff2222;
+    box-shadow: 0 0 20px #ff2222;
+    color: #ff4444;
+}
+.hacks-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+.hacks-item {
+    font-size: 13px;
+    margin: 3px 0;
+    opacity: 0.9;
+}
+
 .ribbon{
     position: absolute;
     top: 42px;
