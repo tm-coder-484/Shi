@@ -27,15 +27,39 @@
     color: #ff4444;
 }
 .hacks-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     letter-spacing: 2px;
+}
+.hacks-hint {
+    font-size: 11px;
+    opacity: 0.6;
+    font-weight: normal;
+    letter-spacing: 0;
 }
 .hacks-item {
     font-size: 13px;
-    margin: 3px 0;
-    opacity: 0.9;
+    margin: 2px 0;
+    text-align: left;
+    transition: transform 0.1s;
+}
+.hacks-item.on {
+    color: #00ff44;
+}
+.hacks-item.off {
+    color: #555;
+}
+.hacks-item.changed {
+    font-weight: bold;
+    transform: scale(1.04);
+    color: #fff;
+}
+.hacks-key {
+    color: #888;
+    font-size: 11px;
+    min-width: 24px;
+    display: inline-block;
 }
 
 .ribbon{
