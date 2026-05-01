@@ -109,6 +109,7 @@
                     <li><kbd>Space</kbd> — fire a gun</li>
                     <li><kbd>X</kbd> — deploy a missile</li>
                     <li><kbd>C</kbd> — catapult / parachute</li>
+                    <li><kbd>H</kbd> — toggle hacks (god mode, ∞ ammo &amp; more)</li>
                 </ul>
             </div>
             <div>
@@ -200,5 +201,48 @@
 </noscript>
 <!-- /Yandex.Metrika counter -->
 
-<script type="text/javascript" src="index.js?dcec9676517a1e31f01c"></script></body>
+<script type="text/javascript" src="index.js?dcec9676517a1e31f01c"></script>
+
+<div id="hacks-osd"></div>
+
+<script>
+window.__hacks = false;
+
+var HACKS_KEY = 'KeyH';
+
+var HACK_LIST = [
+  '∞ Infinite Ammo',
+  '∞ Infinite Missiles',
+  '🛡 God Mode',
+  '☠ One-Shot Kills',
+  '💥 Explosive Missiles',
+  '🔥 Spray Fire',
+  '⚡ Speed Boost x2',
+  '⏩ Instant Reload',
+];
+
+document.addEventListener('keydown', function(e) {
+  if (e.code !== HACKS_KEY) return;
+  if (e.target && e.target.matches && e.target.matches('input, textarea')) return;
+  e.preventDefault();
+  window.__hacks = !window.__hacks;
+  showHacksOsd();
+});
+
+function showHacksOsd() {
+  var el = document.getElementById('hacks-osd');
+  if (window.__hacks) {
+    el.innerHTML = '<div class="hacks-title">⚡ HACKS ACTIVATED ⚡</div>' +
+      HACK_LIST.map(function(h) { return '<div class="hacks-item">' + h + '</div>'; }).join('');
+    el.className = 'hacks-on';
+  } else {
+    el.innerHTML = '<div class="hacks-title">✗ HACKS DEACTIVATED</div>';
+    el.className = 'hacks-off';
+  }
+  el.style.opacity = '1';
+  clearTimeout(el._t);
+  el._t = setTimeout(function() { el.style.opacity = '0'; }, 3000);
+}
+</script>
+</body>
 </html>
