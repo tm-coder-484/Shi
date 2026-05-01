@@ -109,7 +109,7 @@
                     <li><kbd>Space</kbd> — fire a gun</li>
                     <li><kbd>X</kbd> — deploy a missile</li>
                     <li><kbd>C</kbd> — catapult / parachute</li>
-                    <li><kbd>H</kbd> — toggle hacks (god mode, ∞ ammo, freeze, antigravity &amp; more)</li>
+                    <li><kbd>H</kbd> — all hacks on/off &nbsp;|&nbsp; <kbd>1</kbd>–<kbd>9</kbd> — individual hacks</li>
                 </ul>
             </div>
             <div>
@@ -206,43 +206,62 @@
 <div id="hacks-osd"></div>
 
 <script>
-window.__hacks = false;
+window.__hacks = { a:false, g:false, o:false, s:false, e:false, r:false, v:false, z:false, f:false };
 
-var HACKS_KEY = 'KeyH';
-
-var HACK_LIST = [
-  '∞ Infinite Ammo + Missiles',
-  '🛡 God Mode (bullets, missiles, ground)',
-  '☠ One-Shot Kills',
-  '💥 Explosive Missiles',
-  '🔥 Spray Fire (35-round burst)',
-  '🚀 Unlimited Speed',
-  '⏩ Instant Reload',
-  '🌌 Antigravity',
-  '❄ Freeze Enemies',
+var HACKS = [
+  { flag:'a', key:'Digit1', label:'1', name:'Infinite Ammo & Missiles' },
+  { flag:'g', key:'Digit2', label:'2', name:'God Mode (bullets / missiles / ground)' },
+  { flag:'o', key:'Digit3', label:'3', name:'One-Shot Kills' },
+  { flag:'s', key:'Digit4', label:'4', name:'Spray Fire (35-round burst)' },
+  { flag:'e', key:'Digit5', label:'5', name:'Explosive Missiles' },
+  { flag:'r', key:'Digit6', label:'6', name:'Instant Reload' },
+  { flag:'v', key:'Digit7', label:'7', name:'Unlimited Speed' },
+  { flag:'z', key:'Digit8', label:'8', name:'Antigravity' },
+  { flag:'f', key:'Digit9', label:'9', name:'Freeze Enemies' },
 ];
 
+var KEY_TO_FLAG = {};
+HACKS.forEach(function(h) { KEY_TO_FLAG[h.key] = h.flag; });
+
 document.addEventListener('keydown', function(e) {
-  if (e.code !== HACKS_KEY) return;
   if (e.target && e.target.matches && e.target.matches('input, textarea')) return;
-  e.preventDefault();
-  window.__hacks = !window.__hacks;
-  showHacksOsd();
+
+  if (e.code === 'KeyH') {
+    e.preventDefault();
+    var allOn = HACKS.every(function(h) { return window.__hacks[h.flag]; });
+    HACKS.forEach(function(h) { window.__hacks[h.flag] = !allOn; });
+    showHacksOsd(null);
+    return;
+  }
+
+  var flag = KEY_TO_FLAG[e.code];
+  if (flag !== undefined) {
+    e.preventDefault();
+    window.__hacks[flag] = !window.__hacks[flag];
+    showHacksOsd(flag);
+  }
 });
 
-function showHacksOsd() {
+function showHacksOsd(changedFlag) {
   var el = document.getElementById('hacks-osd');
-  if (window.__hacks) {
-    el.innerHTML = '<div class="hacks-title">⚡ HACKS ACTIVATED ⚡</div>' +
-      HACK_LIST.map(function(h) { return '<div class="hacks-item">' + h + '</div>'; }).join('');
-    el.className = 'hacks-on';
-  } else {
-    el.innerHTML = '<div class="hacks-title">✗ HACKS DEACTIVATED</div>';
-    el.className = 'hacks-off';
-  }
+  var anyOn = HACKS.some(function(h) { return window.__hacks[h.flag]; });
+
+  var rows = HACKS.map(function(h) {
+    var on = window.__hacks[h.flag];
+    var cls = 'hacks-item' + (on ? ' on' : ' off') + (h.flag === changedFlag ? ' changed' : '');
+    return '<div class="' + cls + '"><span class="hacks-key">[' + h.label + ']</span> '
+         + (on ? '✓' : '✗') + ' ' + h.name + '</div>';
+  }).join('');
+
+  el.innerHTML = '<div class="hacks-title">'
+    + (anyOn ? '⚡ HACKS' : '✗ ALL OFF')
+    + ' <span class="hacks-hint">[H] all · [1-9] individual</span></div>'
+    + rows;
+
+  el.className = anyOn ? 'hacks-on' : 'hacks-off';
   el.style.opacity = '1';
   clearTimeout(el._t);
-  el._t = setTimeout(function() { el.style.opacity = '0'; }, 3000);
+  el._t = setTimeout(function() { el.style.opacity = '0'; }, 4000);
 }
 </script>
 </body>
