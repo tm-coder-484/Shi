@@ -109,7 +109,7 @@
                     <li><kbd>Space</kbd> — fire a gun</li>
                     <li><kbd>X</kbd> — deploy a missile</li>
                     <li><kbd>C</kbd> — catapult / parachute</li>
-                    <li><kbd>H</kbd> — toggle hacks (god mode, ∞ ammo &amp; more)</li>
+                    <li><kbd>H</kbd> — toggle hacks (god mode, ∞ ammo, freeze, antigravity &amp; more)</li>
                 </ul>
             </div>
             <div>
@@ -211,14 +211,15 @@ window.__hacks = false;
 var HACKS_KEY = 'KeyH';
 
 var HACK_LIST = [
-  '∞ Infinite Ammo',
-  '∞ Infinite Missiles',
-  '🛡 God Mode',
+  '∞ Infinite Ammo + Missiles',
+  '🛡 God Mode (bullets, missiles, ground)',
   '☠ One-Shot Kills',
   '💥 Explosive Missiles',
-  '🔥 Spray Fire',
-  '⚡ Speed Boost x2',
+  '🔥 Spray Fire (35-round burst)',
+  '🚀 Unlimited Speed',
   '⏩ Instant Reload',
+  '🌌 Antigravity',
+  '❄ Freeze Enemies',
 ];
 
 document.addEventListener('keydown', function(e) {
