@@ -109,7 +109,7 @@
                     <li><kbd>Space</kbd> — fire a gun</li>
                     <li><kbd>X</kbd> — deploy a missile</li>
                     <li><kbd>C</kbd> — catapult / parachute</li>
-                    <li><kbd>H</kbd> — all hacks on/off &nbsp;|&nbsp; <kbd>1</kbd>–<kbd>9</kbd> — individual hacks</li>
+                    <li><kbd>H</kbd> — all hacks on/off &nbsp;|&nbsp; <kbd>1</kbd>–<kbd>9</kbd> <kbd>0</kbd> — individual hacks</li>
                 </ul>
             </div>
             <div>
@@ -206,18 +206,19 @@
 <div id="hacks-osd"></div>
 
 <script>
-window.__hacks = { a:false, g:false, o:false, s:false, e:false, r:false, v:false, z:false, f:false };
+window.__hacks = { a:false, g:false, o:false, s:false, e:false, r:false, v:false, z:false, f:false, h:false };
 
 var HACKS = [
   { flag:'a', key:'Digit1', label:'1', name:'Infinite Ammo & Missiles' },
   { flag:'g', key:'Digit2', label:'2', name:'God Mode (bullets / missiles / ground)' },
   { flag:'o', key:'Digit3', label:'3', name:'One-Shot Kills' },
-  { flag:'s', key:'Digit4', label:'4', name:'Spray Fire (35-round burst)' },
-  { flag:'e', key:'Digit5', label:'5', name:'Explosive Missiles' },
+  { flag:'s', key:'Digit4', label:'4', name:'Spray Fire (120-round burst)' },
+  { flag:'e', key:'Digit5', label:'5', name:'Explosive Missiles (2000 bullets)' },
   { flag:'r', key:'Digit6', label:'6', name:'Instant Reload' },
   { flag:'v', key:'Digit7', label:'7', name:'Unlimited Speed' },
   { flag:'z', key:'Digit8', label:'8', name:'Antigravity' },
   { flag:'f', key:'Digit9', label:'9', name:'Freeze Enemies' },
+  { flag:'h', key:'Digit0', label:'0', name:'Homing Missiles (infinite fuel & range)' },
 ];
 
 var KEY_TO_FLAG = {};
@@ -255,7 +256,7 @@ function showHacksOsd(changedFlag) {
 
   el.innerHTML = '<div class="hacks-title">'
     + (anyOn ? '⚡ HACKS' : '✗ ALL OFF')
-    + ' <span class="hacks-hint">[H] all · [1-9] individual</span></div>'
+    + ' <span class="hacks-hint">[H] all · [1-9][0] individual</span></div>'
     + rows;
 
   el.className = anyOn ? 'hacks-on' : 'hacks-off';
