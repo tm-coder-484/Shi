@@ -109,7 +109,7 @@
                     <li><kbd>Space</kbd> — fire a gun</li>
                     <li><kbd>X</kbd> — deploy a missile</li>
                     <li><kbd>C</kbd> — catapult / parachute</li>
-                    <li><kbd>H</kbd> — all hacks on/off &nbsp;|&nbsp; <kbd>1</kbd>–<kbd>9</kbd> <kbd>0</kbd> — individual hacks</li>
+                    <li><kbd>H</kbd> — all hacks on/off &nbsp;|&nbsp; <kbd>1</kbd>–<kbd>9</kbd> <kbd>0</kbd> <kbd>G</kbd> <kbd>N</kbd> — individual hacks</li>
                 </ul>
             </div>
             <div>
@@ -206,7 +206,7 @@
 <div id="hacks-osd"></div>
 
 <script>
-window.__hacks = { a:false, g:false, o:false, s:false, e:false, r:false, v:false, z:false, f:false, h:false };
+window.__hacks = { a:false, g:false, o:false, s:false, e:false, r:false, v:false, z:false, f:false, h:false, m:false, b:false };
 
 var HACKS = [
   { flag:'a', key:'Digit1', label:'1', name:'Infinite Ammo & Missiles' },
@@ -219,6 +219,8 @@ var HACKS = [
   { flag:'z', key:'Digit8', label:'8', name:'Antigravity' },
   { flag:'f', key:'Digit9', label:'9', name:'Freeze Enemies' },
   { flag:'h', key:'Digit0', label:'0', name:'Homing Missiles (infinite fuel & range)' },
+  { flag:'m', key:'KeyG', label:'G', name:'Minigun (3 bullets per shot, 3x fire rate)' },
+  { flag:'b', key:'KeyN', label:'N', name:'Bomb (missile key drops bomb, huge instakill radius + 400 bullets)' },
 ];
 
 var KEY_TO_FLAG = {};
@@ -256,7 +258,7 @@ function showHacksOsd(changedFlag) {
 
   el.innerHTML = '<div class="hacks-title">'
     + (anyOn ? '⚡ HACKS' : '✗ ALL OFF')
-    + ' <span class="hacks-hint">[H] all · [1-9][0] individual</span></div>'
+    + ' <span class="hacks-hint">[H] all · [1-9][0][G][N] individual</span></div>'
     + rows;
 
   el.className = anyOn ? 'hacks-on' : 'hacks-off';
